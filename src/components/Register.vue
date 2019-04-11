@@ -1,5 +1,8 @@
 <template>
+<div>
+  <Header/>
   <div class="container">
+      
     <div class="row">
       <div class="col s12 m8 offset-m2">
          <div class="progress" v-show="loading">
@@ -51,12 +54,15 @@
       </div> <!-- col -->
     </div>  <!-- row -->
   </div>
+</div>
 </template>
 
 <script>
-
+import Header from './Header'
 export default {
-
+  components:{
+      Header
+  },
   data() {
     return {
       user:{

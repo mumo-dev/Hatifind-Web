@@ -2,7 +2,7 @@
   <div class="hero">
   
      <div class="header">
-        <a class="header-item" href="/">Home</a>  
+        <!-- <a class="header-item" href="/">Home</a>   -->
         <a class="header-item" href="/login">Login</a>
         <a class="header-item" href="/register">Register</a>
     </div>
