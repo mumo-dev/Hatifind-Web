@@ -5,8 +5,9 @@
         <a class="waves-effect waves-light btn right" href="/register">Register New Account</a>
         <div class="divider" style="clear:both;"></div>
 
+        <h6 class="center-align blue-text" style="margin-top:18px;">Collection Center Officer  Accounts</h6>
         <div>
-            <table class="bordered responsive-table highlight">
+            <table class="bordered highlight">
               <thead>
                 <tr>
                     <th>Name</th>

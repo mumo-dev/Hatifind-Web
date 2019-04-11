@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="col s6 m4" style="margin-top:20px;">
-              <button class="waves-effect waves-light btn">ADD</button>
+              <button class="waves-effect waves-light btn">ADD TOWN</button>
             </div>
           </form>
 
@@ -35,7 +35,7 @@
             <div class="input-field col s6 m4 browser-default" >
 
                   <select style="display:block!important">
-                    <option value="" disabled selected>Choose the Town</option>
+                    <option value="" disabled selected>Choose Town</option>
                     <option value="1">Option 1</option>
                     <option value="2">Option 2</option>
                     <option value="3">Option 3</option>
@@ -44,8 +44,8 @@
                       <!-- <span class="helper-text" data-error="wrong" data-success="right"></span> -->
             </div>
            
-            <div class="col s6 m4" style="margin-top:20px;">
-              <button class="waves-effect waves-light btn">ADD</button>
+            <div class="col s6 m4" style="margin-top:18px;">
+              <button class="waves-effect waves-light btn">ADD CENTER</button>
             </div>
           </form>
           
@@ -56,7 +56,7 @@
         <div>
           <h6 class="center-align blue-text">Collection Centers</h6>
           <div class="divider"></div>
-            <table class="bordered responsive-table highlight">
+            <table class="bordered  highlight">
               <thead>
                 <tr>
                     <th>Name</th>
@@ -69,7 +69,7 @@
               <tbody>
                 <tr>
                   <td>Alvin</td>
-                  <td>Eclair</td>
+                  <td>Eclair </td>
                   <td>$0.87</td>
                   <td><button
                        class="waves-effect waves-light btn  red darken-1">Delete</button></td>
