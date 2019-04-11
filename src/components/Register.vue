@@ -114,6 +114,8 @@ export default {
                 cpassword:''
               }
 
+              this.addUserToDB(user);
+
               this.$router.push('/dashboard');
               
           })
@@ -133,7 +135,7 @@ export default {
     },
 
     addUserToDB(user) {
-
+      var db = firebase.firestore();
       db.collection("users").add({
               email: user.email,
               uid: user.uid,
