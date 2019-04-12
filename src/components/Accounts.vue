@@ -2,6 +2,9 @@
   <div>
       <Header/>
       <div class="container" style="margin-top:10px">
+        <div class="progress" v-show="loading">
+            <div class="indeterminate"></div>
+        </div>
         <a class="waves-effect waves-light btn right" href="/register">Register New Account</a>
         <div class="divider" style="clear:both;"></div>
 
@@ -18,23 +21,14 @@
               </thead>
 
               <tbody>
-                <tr>
-                  <td>Alvin</td>
-                  <td>Eclair</td>
-                  <td>$0.87</td>
+                <tr v-for="user in users" :key="user.uid">
+                  <td>{{ user.name }}</td>
+                  <td>{{ user.email }}</td>
+                  <td>{{ user.center }}</td>
                   <td><button
                        class="waves-effect waves-light btn  red darken-1">Delete</button></td>
                 </tr>
-                <tr>
-                  <td>Alan</td>
-                  <td>Jellybean</td>
-                  <td>$3.76</td>
-                </tr>
-                <tr>
-                  <td>Jonathan</td>
-                  <td>Lollipop</td>
-                  <td>$7.00</td>
-                </tr>
+                
               </tbody>
             </table>
         </div>
@@ -47,6 +41,37 @@ import Header from './Header'
 export default {
    components:{
       Header
+  },
+
+  data(){
+      return {
+        loading:false,
+        users:[]
+      }
+  },
+
+  mounted(){
+    this.getOfficers();
+  },
+
+  methods:{
+    
+    getOfficers() {
+        this.loading = true;
+        const db  = firebase.firestore();
+        db.collection("users")
+        .where("isSuperAdmin", "==", false)
+        .get().then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+              // console.log(`${doc.id} => ${doc.data()}`);
+              const user = doc.data();
+              this.users.push(user);
+          });
+
+          this.loading = false;
+      });
+    },
+
   }
 }
 </script>

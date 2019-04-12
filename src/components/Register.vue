@@ -18,6 +18,12 @@
           <div class="card-content">
             <h5 class="card-title center-align teal-text " style="font-weight:500">Register</h5>
             <form >
+
+                  <div class="input-field">
+                    <input  id="name" type="text" class="validate" required v-model="user.name">
+                    <label for="name">Name</label>
+                    <!-- <span class="helper-text" data-error="wrong" data-success="right"></span> -->
+                  </div>
                 <!-- <div class="row"> -->
                   <div class="input-field">
                     <input  id="email" type="email" class="validate" required v-model="user.email">
@@ -34,6 +40,12 @@
                   <div class="input-field">
                     <input id="cpassword" type="password" class="validate" required v-model="user.cpassword">
                     <label for="cpassword">Confirm Password</label>
+                    <!-- <span class="helper-text" data-error="wrong" data-success="right"></span> -->
+                  </div>
+
+                   <div class="input-field">
+                    <input  id="phone" type="text" class="validate" required v-model="user.phone">
+                    <label for="phone">Phone</label>
                     <!-- <span class="helper-text" data-error="wrong" data-success="right"></span> -->
                   </div>
 
@@ -66,9 +78,11 @@ export default {
   data() {
     return {
       user:{
+        name:'',
         email:'',
         password:'',
-        cpassword:''
+        cpassword:'',
+        phone:''
       },
       loading:false,
       errorMessage:''
@@ -78,6 +92,7 @@ export default {
   computed:{
     dataIsValid(){
         if(this.user.email && this.user.password && this.user.cpassword
+            &&this.user.name && this.user.phone
            && this.user.password == this.user.cpassword){
              return true;
         }
@@ -92,7 +107,9 @@ export default {
     registerUser(){
       const data = {
         email: this.user.email,
-        password: this.user.password
+        password: this.user.password,
+        name: this.user.name,
+        phone:this.user.phone
       };
 
       this.loading = true;
@@ -103,7 +120,9 @@ export default {
             const user = {
               email: result.user.email,
               token: result.user.refreshToken,
-              uid: result.user.uid
+              uid: result.user.uid,
+              name: data.name,
+              phone: data.phone
             }
 
             //  console.log(user);
@@ -122,7 +141,7 @@ export default {
 
               this.addUserToDB(user);
 
-              this.$router.push('/dashboard');
+              this.$router.push('/manage-accounts');
               
           })
           
@@ -145,8 +164,11 @@ export default {
       db.collection("users").add({
               email: user.email,
               uid: user.uid,
-              isSuperAdmin: true,
-              isAdmin: false,
+              isSuperAdmin: false,
+              isAdmin: true,
+              name:user.name,
+              phone:user.phone,
+              center:null
           })
           .then(function(docRef) {
               console.log("Document written with ID: ", docRef.id);
