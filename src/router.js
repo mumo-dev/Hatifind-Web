@@ -5,6 +5,7 @@ import Dashboard from './components/Dashboard.vue'
 import Accounts from './components/Accounts.vue'
 import Centers from './components/Centers.vue'
 import New from './components/lost/NewItem.vue'
+import Item from './components/lost/SingleItem.vue'
 
 export const routes = [
     {
@@ -48,5 +49,11 @@ export const routes = [
         path: '/add-new-item',
         component:New,
         name:'new-item'
-    }
+    },
+
+    {
+      path: '/item/:id',
+      component:Item,
+      name:'item'
+  }
 ]

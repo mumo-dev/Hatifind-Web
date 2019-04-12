@@ -135,7 +135,8 @@ export default {
             dateCollected:new Date(),
             dateReclaimed: null,
             paid: false,
-            reclaimed:false
+            reclaimed:false,
+            collectorPaid:false
       }).then((docRef)=> {
           // this.updateUsers(data.officer);
           this.loading = false;
