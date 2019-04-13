@@ -4,6 +4,8 @@ import Register from './components/Register.vue'
 import Dashboard from './components/Dashboard.vue'
 import Accounts from './components/Accounts.vue'
 import Centers from './components/Centers.vue'
+import Payment from './components/Payment.vue'
+import AllPayment from './components/AllPayment.vue'
 import New from './components/lost/NewItem.vue'
 import Item from './components/lost/SingleItem.vue'
 
@@ -80,6 +82,26 @@ export const routes = [
         requiresAuth:true,
         isAdmin:true
       }
-  },
+    },
+
+    {
+      path: '/payment',
+      component:Payment,
+      name:'payment',
+      meta:{
+        requiresAuth:true,
+        isAdmin:true
+      }
+    },
+
+    {
+      path: '/all-payment-details',
+      component:AllPayment,
+      name:'payments',
+      meta:{
+        requiresAuth:true,
+        isSuperAdmin:true
+      }
+    },
 
 ]

@@ -3,12 +3,14 @@
   
      <div class="header">
         <!-- <a class="header-item" href="/">Home</a>   -->
-        <a class="header-item" href="/login">Login</a>
-        <a class="header-item" href="/register">Register</a>
+        <!-- <a class="header-item" href="/login">Login</a> -->
+        <!-- <a class="header-item" href="/register">Register</a> -->
     </div>
 
     <div class="welcome">
-        Welcome to Hatifind
+        Welcome to Hatifind <br>
+        <a class="waves-effect waves-light btn btn-large white blue-text "  style="margin-top:30px"
+        href="/login">Login</a>
     </div>
 
    

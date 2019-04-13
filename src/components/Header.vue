@@ -3,8 +3,16 @@
     <div class="nav-wrapper container"><a id="logo-container" href="/dashboard" 
         class="brand-logo">Hatifind</a>
         <ul class="right hide-on-med-and-down">
-        <li><a href="/dashboard"><i class="material-icons left">apps</i>Home</a></li>
-        <li><a href="/add-new-item"><i class="material-icons left">add</i>Add</a></li>
+        <li v-if="!isSuperAdmin"><a href="/dashboard"><i class="material-icons left">apps</i>Home</a></li>
+        <li v-if="!isSuperAdmin"><a href="/add-new-item"><i class="material-icons left">add</i>Add</a></li>
+        <li v-if="isSuperAdmin">
+          <a href="/all-payment-details">
+          <i class="material-icons left">euro_symbol</i>Payments</a>
+        </li>
+        <li v-else>
+          <a href="/payment">
+          <i class="material-icons left">euro_symbol</i>Payments</a>
+        </li>
         <li v-if="isSuperAdmin">
           <router-link to="/manage-accounts">
           <i class="material-icons left">people</i>Accounts
@@ -25,7 +33,17 @@
          
         </li>
         <li><a href="/dashboard"><i class="material-icons left">apps</i>Home</a></li>
+
         <li><a href="/add-new-item"><i class="material-icons left">add</i>Add</a></li>
+        <li v-if="isSuperAdmin">
+          <a href="/all-payment-details">
+          <i class="material-icons left">euro_symbol</i>Payments</a>
+        </li>
+        <li v-else>
+          <a href="/payment">
+          <i class="material-icons left">euro_symbol</i>Payments</a>
+        </li>
+        <!-- all-payment-details -->
           <li v-if="isSuperAdmin">
             <router-link to="/manage-accounts">
             <i class="material-icons left">people</i>Accounts

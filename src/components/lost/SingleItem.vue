@@ -188,8 +188,9 @@ export default {
           return;
         }
 
-        db.collection("payments").doc(this.item.id).set({
+        db.collection("payments").add({
           'itemId': this.item.id,
+          'itemName': this.item.name,
           'center': this.item.center,
           'paidBy': 'customer',
           'paidTo': 'center',
@@ -221,12 +222,15 @@ export default {
           return;
         }
 
-        db.collection("payments").doc(this.item.id).set({
+        db.collection("payments").add({
           'itemId': this.item.id,
+          'itemName': this.item.name,
           'center': this.item.center,
           'paidBy': 'center',
           'paidTo': this.item.collectedBy,
           'date': new Date()
+        }).then(()=>{
+          console.log('Payment details recorderd')
         })
 
         db.collection("items").doc(this.item.id).update({
