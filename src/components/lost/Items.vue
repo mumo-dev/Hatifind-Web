@@ -12,12 +12,13 @@
 
     <div class="search-bar">
       <div class="input-field col s9">
-        <input type="text">
+        <input type="text" v-model="searchTerm">
         <label>Search by Item Name</label>
       </div>
      
       <div class="col-s3">
-        <button class="waves-effect waves-light btn" style="margin-top:20px">Search</button>
+        <button class="waves-effect waves-light btn" style="margin-top:20px" 
+        @click.prevent="searchItem">Search</button>
       </div>
     </div>
 
@@ -49,7 +50,8 @@ export default {
 
       items:[],
       loading:false,
-      errorMessage:false
+      errorMessage:false,
+      searchTerm:''
     }
   },
 
@@ -76,6 +78,10 @@ export default {
              this.errorMessage = true;
             console.log("Error getting documents: ", error);
         });
+    },
+
+    searchItem() {
+      
     }
   }
 }

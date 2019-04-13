@@ -49,6 +49,11 @@
                     
                   </tr>
 
+                  <tr v-if="item.dateReclaimed">
+                    <td>Date Reclaimed:</td>
+                    <td>{{ reclaimedFormattedDate }}</td>
+                  </tr>
+
                   <tr>
                     <td>Center:</td>
                     <td>{{ item.center ? item.center: 'Unknown' }}</td>
@@ -177,6 +182,20 @@ export default {
         this.loading = true;
         //TODO update payment table
         var db = firebase.firestore();
+
+        if(!this.item.center){
+          alert('Update the Collection Center first');
+          return;
+        }
+
+        db.collection("payments").doc(this.item.id).set({
+          'itemId': this.item.id,
+          'center': this.item.center,
+          'paidBy': 'customer',
+          'paidTo': 'center',
+          'date': new Date()
+        });
+
         db.collection("items").doc(this.item.id).update({
           'paid': this.ownerPaid
         }).then(()=> {
@@ -196,6 +215,20 @@ export default {
       //TODO update payment table ---
         this.loading = true;
         var db = firebase.firestore();
+
+        if(!this.item.center){
+          alert('Update the Collection Center first');
+          return;
+        }
+
+        db.collection("payments").doc(this.item.id).set({
+          'itemId': this.item.id,
+          'center': this.item.center,
+          'paidBy': 'center',
+          'paidTo': this.item.collectedBy,
+          'date': new Date()
+        })
+
         db.collection("items").doc(this.item.id).update({
           'collectorPaid': this.collectorPaid
         }).then(()=> {
@@ -217,10 +250,12 @@ export default {
         this.loading = true;
         var db = firebase.firestore();
         db.collection("items").doc(this.item.id).update({
-          'reclaimed': this.reclaimed
+          'reclaimed': this.reclaimed,
+          'dateReclaimed': new Date()
         }).then(()=> {
           this.loading = false;
           this.item.reclaimed = this.reclaimed;
+          // this.item.dateReclaimed = new Date();
           console.log("Document successfully written!");
         }).catch((error) =>{
           this.loading = false;
@@ -283,6 +318,11 @@ export default {
   computed: {
     formattedDate() {
       var date = new Date(this.item.dateCollected.seconds * 1000);
+      return moment(date).format("lll");
+    },
+
+     reclaimedFormattedDate() {
+      var date = new Date(this.item.dateReclaimed.seconds * 1000);
       return moment(date).format("lll");
     }
   }

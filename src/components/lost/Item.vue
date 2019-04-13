@@ -69,12 +69,12 @@
 
             <tr>
               <td>Center:</td>
-              <td>{{ item.center ? center: 'Unknown' }} </td>
+              <td>{{ item.center ? item.center: 'Unknown' }} </td>
             </tr>
 
             <tr>
               <td>Collector Paid</td>
-              <td>   {{ item.collectoPpaid ? 'Paid' : 'Not Paid'}} 
+              <td>   {{ item.collectorPaid ? 'Paid' : 'Not Paid'}} 
               </td>
             </tr>
 
