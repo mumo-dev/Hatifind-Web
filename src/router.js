@@ -11,49 +11,75 @@ export const routes = [
     {
       path: '/',
       component: Home,
-      name:'home'
+      name:'home',
+      
     },
 
     {
       path: '/login',
       component: Login,
-      name:'login'
+      name:'login', 
     },
 
     {
       path: '/register',
       component: Register,
-      name:'register'
+      name:'register',
+      meta:{
+        requiresAuth:true,
+        isSuperAdmin:true
+      }
     },
 
     {
       path: '/dashboard',
       component: Dashboard,
-      name:'dashboard'
+      name:'dashboard',
+      meta:{
+        requiresAuth:true,
+        isAdmin:true
+      }
     },
 
     {
       path: '/manage-accounts',
       component: Accounts,
-      name:'accounts'
+      name:'accounts',
+      meta:{
+        requiresAuth:true,
+        isSuperAdmin:true
+      }
     },
 
     
     {
       path: '/collection-centers',
       component: Centers,
-      name:'centers'
+      name:'centers',
+      meta:{
+        requiresAuth:true,
+        isSuperAdmin:true
+      }
     }, 
 
     {
         path: '/add-new-item',
         component:New,
-        name:'new-item'
+        name:'new-item',
+        meta:{
+          requiresAuth:true,
+          isAdmin:true
+        }
     },
 
     {
       path: '/item/:id',
       component:Item,
-      name:'item'
-  }
+      name:'item',
+      meta:{
+        requiresAuth:true,
+        isAdmin:true
+      }
+  },
+
 ]

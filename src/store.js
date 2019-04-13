@@ -1,15 +1,9 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-
-Vue.use(Vuex)
-export const store = new Vuex.Store( {
+import { getLocalUser} from './helpers'
+const currentUser = getLocalUser();
+export default {
   
   state: {
-    user:{
-        uid:null,
-        email:null,
-        token:null
-    },
+    user:currentUser,
     isAuthenticated:false
   },
 
@@ -38,4 +32,4 @@ export const store = new Vuex.Store( {
 
   }
 
-});
+}

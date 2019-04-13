@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col s12 m8 offset-m2">
+      <div class="col s12 m6 offset-m3">
          <div class="progress" v-show="loading">
             <div class="indeterminate"></div>
         </div>
@@ -88,29 +88,38 @@ export default {
           .then((result)=>{
             console.log(result);
 
-            const user = {
-              email: result.user.email,
-              token: result.user.refreshToken,
-              uid: result.user.uid
-            }
+            const db=  firebase.firestore();
+            let user ={};
+            db.collection('users').where('email','==',data.email)
+              .get()
+              .then((querySnapshot)=> {
+                    querySnapshot.forEach((doc)=> {
+                        // doc.data() is never undefined for query doc snapshots
+                        // console.log(doc.id, " => ", doc.data());
+                        user = doc.data();
+                        console.log(user);
 
-            //  console.log(user);
+                        localStorage.setItem('user', JSON.stringify(user));
 
-             localStorage.setItem('user', JSON.stringify(user));
+                        this.$store.commit('storeUser', user);
+                        this.$store.commit('setAuthenticationState', true);
 
-             this.$store.commit('storeUser', user);
-             this.$store.commit('setAuthenticationState', true);
-            
-            //success.
-              this.user = {
-                email:'',
-                password:''
-              }
+                        //success.
+                        this.user = {
+                          email:'',
+                          password:''
+                        }
 
-             // this.addUserToDB(user);
+                    // this.addUserToDB(user);
 
-              this.$router.push('/dashboard');
-              
+                      this.$router.push('/dashboard');
+                    });
+                })
+                .catch((error) => {
+                      this.errorMessage = error.message
+                    console.log("Error getting documents: ", error);
+                }); 
+
           })
           
           .catch((error)=> {

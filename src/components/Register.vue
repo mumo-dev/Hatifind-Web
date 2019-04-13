@@ -127,10 +127,10 @@ export default {
 
             //  console.log(user);
 
-             localStorage.setItem('user', JSON.stringify(user));
+            //  localStorage.setItem('user', JSON.stringify(user));
 
-             this.$store.commit('storeUser', user);
-             this.$store.commit('setAuthenticationState', true);
+            //  this.$store.commit('storeUser', user);
+            //  this.$store.commit('setAuthenticationState', true);
             
             //success.
               this.user = {

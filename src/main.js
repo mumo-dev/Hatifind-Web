@@ -1,19 +1,56 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Vuex from 'vuex';
 
 import firebase from "firebase";
-import {store} from './store'
+
+import storeData from './store';
+import  { routes } from './router'
 
 import App from './App.vue'
 
 Vue.use(VueRouter);
+Vue.use(Vuex);
 
-
-import  { routes } from './router'
+const store = new Vuex.Store(storeData);
 
 const router = new VueRouter({
   routes,
   mode:'history'
+});
+
+router.beforeEach((to, from, next)=>{
+  const requiresAuth = to.matched.some(record=> record.meta.requiresAuth);
+  const isSuperAdmin = to.matched.some(record=> record.meta.isSuperAdmin);
+  // const isAdmin = to.matched.some(record=> record.meta.isAdmin);
+
+  
+  // const userIsAdmin = store.user.isAdmin == true;
+
+
+  let isAuthenticated = store.state.isAuthenticated;
+  const currentUser = store.state.user;
+  if(currentUser){
+    isAuthenticated = true;
+  }
+
+  if(requiresAuth && !isAuthenticated){
+      next('/login');
+  }else if(to.path == '/login' && isAuthenticated){
+      next('/dashboard');
+  }else {
+      //redirect normal users access to admin;;
+      if(isSuperAdmin){
+        const userIsSuperAdmin = store.state.user.isSuperAdmin == true;
+        if(!userIsSuperAdmin){
+          next('/dashboard');
+        }
+      }
+      
+    
+      // if(isSu)
+      next();
+  }
 });
 
 

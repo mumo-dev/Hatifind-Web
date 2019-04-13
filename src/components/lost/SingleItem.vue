@@ -274,11 +274,18 @@ export default {
         .get()
         .then(doc => {
           this.loading = false;
-          this.loaded = true;
-          const item = doc.data();
-          this.error = false;
-          item["id"] = doc.id;
-          this.item = item;
+          
+          if(doc.exists){
+              this.loaded = true;
+              const item = doc.data();
+              this.error = false;
+              item["id"] = doc.id;
+              this.item = item;
+          }else {
+            this.loaded = false;
+            this.error = true;
+            this.errorMessage = "Whoops :) Seems the Item does not exist";
+          }
         })
         .catch(err => {
           this.loading = true;
